@@ -10,17 +10,17 @@ Created states and policies.
 ### 1.2 Markov Reward Process:
 Added rewards.
 
-![1.2](1.2 Markov Reward Process.png "Opdracht 1.2")
+![1.2](https://github.com/Kwuffin/Adaptive-Systems/blob/main/Inleveropgave%201/1.2%20Markov%20Reward%20Process.png "Opdracht 1.2")
 
 ### 1.3 Sampling. Een voorbereiding voor Monte-Carlo Policy Evaluation:
 Added samples.
 
-![1.3](1.3 Sampling.png "Opdracht 1.3")
+![1.3](https://github.com/Kwuffin/Adaptive-Systems/blob/main/Inleveropgave%201/1.3%20Sampling.png "Opdracht 1.3")
 
 ### 1.4 De value-function bepalen:
 Calculated values of nodes for the first two iterations.
 
-![1.4](1.4 De value-function bepalen.png "Opdracht 1.4")
+![1.4](https://github.com/Kwuffin/Adaptive-Systems/blob/main/Inleveropgave%201/1.4%20De%20value-function%20bepalen.png "Opdracht 1.4")
 
 ### 1.5 Zelf-onderzoek
  In werkelijkheid zien we vrijwel nooit een discount factor van 1. Een discount factor van 0.9 is wel veel voorkomend. Noem twee problemen die je mogelijk hebt met γ=1

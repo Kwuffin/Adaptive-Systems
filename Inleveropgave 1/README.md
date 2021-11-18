@@ -4,17 +4,22 @@ In deze directory zullen alle opdrachten van de eerste inleveropgave zitten, ook
 ## Theoretische opdrachten:
 ### 1.1 Markov Chain:
 Created states and policies.
+
 ![1.1](1.1 Markov Chain.png "Opdracht 1.1")
 
 ### 1.2 Markov Reward Process:
 Added rewards.
+
 ![1.2](1.2 Markov Reward Process.png "Opdracht 1.2")
 
 ### 1.3 Sampling. Een voorbereiding voor Monte-Carlo Policy Evaluation:
 Added samples.
+
 ![1.3](1.3 Sampling.png "Opdracht 1.3")
 
 ### 1.4 De value-function bepalen:
+Calculated values of nodes for the first two iterations.
+
 ![1.4](1.4 De value-function bepalen.png "Opdracht 1.4")
 
 ### 1.5 Zelf-onderzoek

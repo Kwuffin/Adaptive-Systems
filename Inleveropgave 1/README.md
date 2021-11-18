@@ -5,7 +5,7 @@ In deze directory zullen alle opdrachten van de eerste inleveropgave zitten, ook
 ### 1.1 Markov Chain:
 Created states and policies.
 
-![1.1](1.1 Markov Chain.png "Opdracht 1.1")
+![1.1](https://github.com/Kwuffin/Adaptive-Systems/blob/main/Inleveropgave%201/1.1%20Markov%20Chain.png "Opdracht 1.1")
 
 ### 1.2 Markov Reward Process:
 Added rewards.

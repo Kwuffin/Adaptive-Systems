@@ -36,3 +36,10 @@ received immediately."
 ##### Probleem 2:
 Een discount rate dat kleiner is dan 1 is een wiskundig trucje om een oneindige som eindig te maken.
 Dit helpt met het convergeren van het algoritme als het niet zeker is wanneer het programma eindigt.
+
+### 2. Control met Value Iteration
+Bepaal de utility van elke state (value function) van onderstaande MDP, je mag zelf kiezen wanneer je stopt met itereren maar beargumenteer waarom. Te vroeg stoppen is niet goed. Neem een discount factor van γ=1
+
+De value voor alle states worden geinitialiseerd op 0. De waardes boven de pijlen zijn de rewards die je krijgt voor het gaan naar de state.
+
+![2.](https://github.com/Kwuffin/Adaptive-Systems/blob/main/Inleveropgave%201/2.0%20Control%20met%20Value%20Iteration.png "Opdracht 2.")

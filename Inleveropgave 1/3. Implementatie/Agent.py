@@ -9,6 +9,10 @@ class Agent:
         self.pos = start_pos
         self.policy = policy
 
+        self.previous_values = np.zeros((4, 4))
+
+        self.iteration = 0
+
     def value_func(self, current_state):
         # values = np.zeros((4, 4))
         # coords = current_state[0]
@@ -25,9 +29,26 @@ class Agent:
         #     0.25 * (reward + 1 * values[])
         pass
 
-    def next_action(self, policy, state):
-        pass
-
     def value_iteration(self):
-        values = np.zeros((4, 4))
+        while True:
+            self.iteration += 1
+            for x in self.maze.loc:
+                for state in x:
+                    if state in self.maze.terminate:
+                        continue
+                    coords = list(zip(*np.where(self.maze.loc == state)))[0]
+                    state_values = []
+                    states_to_calc = []
+                    for action in range(4):
+                        neigh_state = self.maze.step([[coords[0], coords[1]],
+                                                     self.maze.rew[coords[0], coords[1]],
+                                                     False],
+                                                    action)
 
+                        neigh_coords = neigh_state[0]
+                        neigh_reward = self.maze.rew[neigh_coords[0], neigh_coords[1]]
+                        neigh_old_value = self.previous_values[neigh_coords[0], neigh_coords[1]]
+
+                        state_values.append(0.25 * (neigh_reward + 1 * neigh_old_value))  # Bellman equation
+
+                    self.previous_values[coords[0], coords[1]] = max(state_values)

@@ -13,6 +13,8 @@ class Maze:
                             [10, -2, -1, -1]])
         self.act = [0, 1, 2, 3]  # [up, right, down, left]
 
+        self.terminate = [0, 15]
+
     def step(self, current_state, action):
         """
         Given a state and action, performs the action and returns the next state

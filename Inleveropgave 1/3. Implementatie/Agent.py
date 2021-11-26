@@ -49,6 +49,6 @@ class Agent:
                         neigh_reward = self.maze.rew[neigh_coords[0], neigh_coords[1]]
                         neigh_old_value = self.previous_values[neigh_coords[0], neigh_coords[1]]
 
-                        state_values.append(0.25 * (neigh_reward + 1 * neigh_old_value))  # Bellman equation
+                        state_values.append(neigh_reward + 1 * neigh_old_value)  # Bellman equation
 
                     self.previous_values[coords[0], coords[1]] = max(state_values)

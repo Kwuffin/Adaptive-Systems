@@ -52,3 +52,5 @@ class Agent:
                         state_values.append(neigh_reward + 1 * neigh_old_value)  # Bellman equation
 
                     self.previous_values[coords[0], coords[1]] = max(state_values)
+
+            print(self.previous_values)

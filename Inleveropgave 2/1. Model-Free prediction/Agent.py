@@ -2,9 +2,10 @@ import numpy as np
 
 
 class Agent:
-    def __init__(self, maze):
+    def __init__(self, maze, discount):
         self.maze = maze
         self.start = 2
+        self.discount = discount
 
     def create_episode(self, maze, start_pos, terminal_states):
         episode = [start_pos]
@@ -55,11 +56,29 @@ class Agent:
 
         return episode
 
-    def monte_carlo_policy(self):
+    def monte_carlo_policy(self, iterations):
         value_matrix = np.zeros((4, 4))
-        returns = []
+        returns = {}
 
-        for iteration in range(100):
-            episodes = []  # Generate episode(s)
-            for episode in episodes:
-                pass
+        for iteration in range(iterations):
+            episode = self.create_episode(self.maze, self.start, self.maze.terminate)  # Generate episode
+            # print(episode)
+            g = 0
+
+            for step in episode[-2::-1]:
+                coord = list(zip(*np.where(self.maze.loc == step)))[0]
+                reward = self.maze.rew[coord[0], coord[1]]
+                g = self.discount * g + reward
+                if step not in returns.keys():
+                    returns[step] = [g]
+                else:
+                    returns[step].append(g)
+
+        for state, state_returns in returns.items():
+            state_coords = list(zip(*np.where(self.maze.loc == state)))[0]
+            value_matrix[state_coords[0], state_coords[1]] = np.average(state_returns)
+
+        print(f"{value_matrix}\n\n"
+              f"Stats:\n"
+              f"Iterations:    {iterations}\n"
+              f"Discount rate: {self.discount}")

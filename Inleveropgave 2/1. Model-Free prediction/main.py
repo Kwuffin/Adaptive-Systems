@@ -2,6 +2,6 @@ from Maze import Maze
 from Agent import Agent
 
 maze = Maze()
-agent = Agent(maze)
+agent = Agent(maze, 1)
 
-print(agent.create_episode(maze, agent.start, maze.terminate))
+agent.monte_carlo_policy(10000)

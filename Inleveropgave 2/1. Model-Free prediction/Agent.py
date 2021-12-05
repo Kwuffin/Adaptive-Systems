@@ -56,13 +56,12 @@ class Agent:
 
         return episode
 
-    def monte_carlo_policy(self, iterations):
+    def monte_carlo(self, iterations):
         value_matrix = np.zeros((4, 4))
         returns = {}
 
         for iteration in range(iterations):
             episode = self.create_episode(self.maze, self.start, self.maze.terminate)  # Generate episode
-            # print(episode)
             g = 0
 
             for step in episode[-2::-1]:
@@ -82,3 +81,6 @@ class Agent:
               f"Stats:\n"
               f"Iterations:    {iterations}\n"
               f"Discount rate: {self.discount}")
+
+    def temporal_difference_learning(self):
+        pass

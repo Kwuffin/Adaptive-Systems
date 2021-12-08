@@ -32,7 +32,7 @@ class Agent:
             g = 0
 
             for i, step in reversed(list(enumerate(episode[-2::-1]))):
-                coord = list(zip(*np.where(self.maze.loc == episode[i+1])))[0]
+                coord = list(zip(*np.where(self.maze.loc == episode[i + 1])))[0]
                 reward = self.maze.rew[coord[0], coord[1]]
                 g = self.discount * g + reward
                 if step not in returns.keys():
@@ -51,8 +51,14 @@ class Agent:
 
     def temporal_difference(self, policy, alpha=0.1):
         value_matrix = np.zeros((4, 4))
-        episode = self.create_episode(self.maze, self.start, self.maze.terminate, policy)
-        for step in episode:
-            coord = list(zip(*np.where(self.maze.loc == step)))[0]
-            reward = self.maze.rew[coord[0], coord[1]]
+        for _ in range(100):
+            episode = self.create_episode(self.maze, self.start, self.maze.terminate, policy)
+            for i, step in enumerate(episode[:-1:]):
+                coord = list(zip(*np.where(self.maze.loc == step)))[0]
+                next_coord = list(zip(*np.where(self.maze.loc == episode[i + 1])))[0]
+                reward = self.maze.rew[next_coord[0], next_coord[1]]
+                value_matrix[coord[0], coord[1]] = value_matrix[coord[0], coord[1]] + alpha * \
+                                                   (reward + self.discount * value_matrix[next_coord[0], next_coord[1]] -
+                                                    value_matrix[coord[0], coord[1]])
 
+        print(value_matrix)

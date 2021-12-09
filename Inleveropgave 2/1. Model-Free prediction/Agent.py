@@ -79,5 +79,11 @@ class Agent:
         for _ in range(iterations):
             episode = self.create_episode(self.maze, self.start, self.maze.terminate, policy)
             g = 0
-            for i, step in enumerate(episode):
-                pass
+            for i, step in reversed(list(enumerate(episode[-2::-1]))):
+                coord = list(zip(*np.where(self.maze.loc == episode[i + 1])))[0]
+                reward = self.maze.rew[coord[0], coord[1]]
+                g = self.discount * g + reward
+                if step not in returns.keys():
+                    returns[step] = [g]
+                else:
+                    returns[step].append(g)

@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 
 
@@ -59,4 +61,24 @@ def optimal_policy(maze, state):
     action = policy_matrix[coords[0], coords[1]]
     if action != 9:  # 9-Dimensional movement is not possible
         return get_state(maze, state, action)
+
+
+def epsilon_soft_policy(maze, state, epsilon):
+    policy_matrix = np.array([[1, 1, 1, 9],
+                              [0, 0, 0, 0],
+                              [0, 0, 3, 3],
+                              [9, 0, 0, 0]])
+
+    coords = list(zip(*np.where(maze.loc == state)))[0]
+    chance = (1-((epsilon/4)*3))*1000000
+    best_action = policy_matrix[coords[0], coords[1]]
+    if np.random.randint(0, 1000000) < chance:
+        action = policy_matrix[coords[0], coords[1]]
+        return get_state(maze, state, action)
+
+    else:
+        rand_act_non_optimal = best_action
+        while rand_act_non_optimal == best_action:
+            rand_act_non_optimal = np.random.rand(0, 3)
+        return get_state(maze, state, rand_act_non_optimal)
 

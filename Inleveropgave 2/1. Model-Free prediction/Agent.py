@@ -49,10 +49,14 @@ class Agent:
               f"Iterations:    {iterations}\n"
               f"Discount rate: {self.discount}")
 
-    def temporal_difference(self, policy, alpha=0.1):
+    def temporal_difference(self, iterations, policy, alpha=0.1, exploring_start=True):
         value_matrix = np.zeros((4, 4))
-        for _ in range(100):
-            episode = self.create_episode(self.maze, self.start, self.maze.terminate, policy)
+        for _ in range(iterations):
+            if exploring_start:
+                start_pos = np.random.randint(self.maze.loc.min(), self.maze.loc.max())
+            else:
+                start_pos = self.start
+            episode = self.create_episode(self.maze, start_pos, self.maze.terminate, policy)
             for i, step in enumerate(episode[:-1:]):
                 coord = list(zip(*np.where(self.maze.loc == step)))[0]
                 next_coord = list(zip(*np.where(self.maze.loc == episode[i + 1])))[0]
@@ -61,4 +65,9 @@ class Agent:
                                                    (reward + self.discount * value_matrix[next_coord[0], next_coord[1]] -
                                                     value_matrix[coord[0], coord[1]])
 
-        print(value_matrix)
+        print(f"{value_matrix}\n\n"
+              f"Stats:\n"
+              f"Iterations:      {iterations}\n"
+              f"Discount rate:   {self.discount}\n"
+              f"Alpha:           {alpha}\n"
+              f"Exploring Start: {exploring_start}")

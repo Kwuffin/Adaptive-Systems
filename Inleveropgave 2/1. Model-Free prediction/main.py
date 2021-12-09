@@ -6,6 +6,31 @@ maze = Maze()
 agent = Agent(maze, 1)
 agent_discounted = Agent(maze, 0.9)
 
-# agent.monte_carlo(1000, optimal_policy)
-agent.temporal_difference(optimal_policy)
-agent_discounted.temporal_difference(optimal_policy)
+iterations = 1000
+
+print("First-Visit Monte Carlo:")
+print("Random policy:")
+agent.monte_carlo(iterations, random_policy)
+print("-----------------")
+agent_discounted.monte_carlo(iterations, random_policy)
+print("===========================================\n")
+
+print("Optimal policy:")
+agent.monte_carlo(iterations, optimal_policy)
+print("-----------------")
+agent_discounted.monte_carlo(iterations, optimal_policy)
+print("===========================================\n")
+
+
+print("Temporal Difference:")
+print("Random policy:")
+agent.temporal_difference(iterations, random_policy)
+print("-----------------")
+agent_discounted.temporal_difference(iterations, random_policy)
+print("===========================================\n")
+
+print("Optimal policy:")
+agent.temporal_difference(iterations, optimal_policy)
+print("-----------------")
+agent_discounted.temporal_difference(iterations, optimal_policy)
+print("===========================================\n")

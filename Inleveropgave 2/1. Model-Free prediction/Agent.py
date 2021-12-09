@@ -66,7 +66,7 @@ class Agent:
             value_matrix[state_coords[0], state_coords[1]] = np.average(state_returns)
 
         print(f"{value_matrix}\n\n"
-              f"Stats:\n"
+              f"Settings:\n"
               f"Iterations:    {iterations}\n"
               f"Discount rate: {self.discount}")
 
@@ -87,7 +87,7 @@ class Agent:
                                                     value_matrix[coord[0], coord[1]])
 
         print(f"{value_matrix}\n\n"
-              f"Stats:\n"
+              f"Settings:\n"
               f"Iterations:      {iterations}\n"
               f"Discount rate:   {self.discount}\n"
               f"Alpha:           {alpha}\n"
@@ -151,3 +151,8 @@ class Agent:
                       f"Action:   |    Value:")
                 for action, value in state.items():
                     print(f"{action}          |    {value}")
+
+        print(f"Settings:\n"
+              f"Iterations:      {iterations}\n"
+              f"Discount rate:   {self.discount}\n"
+              f"Epsilon:         {epsilon}")

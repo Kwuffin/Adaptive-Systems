@@ -16,6 +16,9 @@ class Agent:
             episode.append(state_act)
             state = state_act[0]
 
+        st, act = map(list, zip(*episode))
+        act.append(act.pop(0))
+        episode = zip(st, act)
         return episode
 
     def monte_carlo(self, iterations, policy):
@@ -131,8 +134,8 @@ class Agent:
         for state, act_values in returns.items():
             coord = list(zip(*np.where(self.maze.loc == state)))[0]
             for act, values in act_values.items():
-                if act == 9:
-                    continue
+                # if act == 9:
+                #     continue
                 avg_val = np.average(values)
                 q_matrix[coord[0], coord[1]][act] = avg_val
 

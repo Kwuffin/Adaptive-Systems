@@ -6,7 +6,7 @@ maze = Maze()
 agent = Agent(maze, 1)
 agent_discounted = Agent(maze, 0.9)
 
-iterations = 100000
+iterations = 2
 
 # First visit Monte Carlo
 print("First-Visit Monte Carlo:")

@@ -71,3 +71,13 @@ class Agent:
               f"Discount rate:   {self.discount}\n"
               f"Alpha:           {alpha}\n"
               f"Exploring Start: {exploring_start}")
+
+    def on_policy_monte_carlo(self, iterations, epsilon, policy):
+        q_matrix = np.full((4, 4), {0: [], 1: [], 2: [], 3: []})
+        returns = {}
+
+        for _ in range(iterations):
+            episode = self.create_episode(self.maze, self.start, self.maze.terminate, policy)
+            g = 0
+            for i, step in enumerate(episode):
+                pass

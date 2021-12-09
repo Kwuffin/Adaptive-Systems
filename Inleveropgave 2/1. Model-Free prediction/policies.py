@@ -42,13 +42,13 @@ def get_state(maze, state, action):
             return (state, action)
 
 
-def random_policy(maze, state):
+def random_policy(maze, state, *args, **kwargs):
     # Get a random action
     action = np.random.randint(0, 4)  # 0: Up, 1: Right, 2: Down, 3: Left
     return get_state(maze, state, action)
 
 
-def optimal_policy(maze, state):
+def optimal_policy(maze, state, *args, **kwargs):
     policy_matrix = np.array([[1, 1, 1, 9],
                               [0, 0, 0, 0],
                               [0, 0, 3, 3],
@@ -60,7 +60,7 @@ def optimal_policy(maze, state):
         return get_state(maze, state, action)
 
 
-def epsilon_soft_policy(maze, state, epsilon):
+def epsilon_soft_policy(maze, state, epsilon, *args, **kwargs):
     policy_matrix = np.array([[1, 1, 1, 9],
                               [0, 0, 0, 0],
                               [0, 0, 3, 3],
@@ -76,6 +76,6 @@ def epsilon_soft_policy(maze, state, epsilon):
     else:
         rand_act_non_optimal = best_action
         while rand_act_non_optimal == best_action:
-            rand_act_non_optimal = np.random.rand(0, 3)
+            rand_act_non_optimal = np.random.randint(0, 3)
         return get_state(maze, state, rand_act_non_optimal)
 

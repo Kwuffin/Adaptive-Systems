@@ -94,7 +94,12 @@ class Agent:
               f"Exploring Start: {exploring_start}")
 
     def on_policy_monte_carlo(self, iterations, epsilon, policy):
-        q_matrix = np.full((4, 4), {0: [], 1: [], 2: [], 3: []})
+        # q_matrix = np.full((4, 4), {0: [], 1: [], 2: [], 3: []})  # Aparently this doesn't work because all dictionaries are the same instance of one object.
+        q_matrix = np.array(
+            [[{0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}],
+             [{0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}],
+             [{0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}],
+             [{0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}, {0: [], 1: [], 2: [], 3: []}]])
         returns = {}
 
         for _ in range(iterations):
@@ -134,8 +139,6 @@ class Agent:
         for state, act_values in returns.items():
             coord = list(zip(*np.where(self.maze.loc == state)))[0]
             for act, values in act_values.items():
-                # if act == 9:
-                #     continue
                 avg_val = np.average(values)
                 q_matrix[coord[0], coord[1]][act] = avg_val
 

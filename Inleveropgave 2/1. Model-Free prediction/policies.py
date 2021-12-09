@@ -8,41 +8,38 @@ def get_state(maze, state, action):
     # Up
     if action == 0:
         if state in maze.loc[0]:
-            return state
+            return (state, action)
         else:
             # Update current state
             state = maze.loc[state_coord[0] - 1, state_coord[1]]
-            state_coord = list(zip(*np.where(maze.loc == state)))[0]
-            return state
+            return (state, action)
 
     # Right
     elif action == 1:
         if state in maze.loc[:, -1]:
-            return state
+            return (state, action)
         else:
             # Update current state
             state = maze.loc[state_coord[0], state_coord[1] + 1]
-            state_coord = list(zip(*np.where(maze.loc == state)))[0]
-            return state
+            return (state, action)
 
     # Down
     elif action == 2:
         if state in maze.loc[-1]:
-            return state
+            return (state, action)
         else:
             # Update current state
             state = maze.loc[state_coord[0] + 1, state_coord[1]]
-            state_coord = list(zip(*np.where(maze.loc == state)))[0]
-            return state
+            return (state, action)
 
+    # Left
     else:
         if state in maze.loc[:, 0]:
-            return state
+            return (state, action)
         else:
             # Update current state
             state = maze.loc[state_coord[0], state_coord[1] - 1]
-            state_coord = list(zip(*np.where(maze.loc == state)))[0]
-            return state
+            return (state, action)
 
 
 def random_policy(maze, state):

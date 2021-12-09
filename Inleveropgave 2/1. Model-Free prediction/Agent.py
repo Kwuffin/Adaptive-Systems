@@ -9,11 +9,12 @@ class Agent:
         self.discount = discount
 
     def create_episode(self, maze, start_pos, terminal_states, policy):
-        episode = [start_pos]
+        episode = [(start_pos, 9)]
         state = start_pos
         while state not in terminal_states:
-            state = policy(maze, state)
-            episode.append(state)
+            state_act = policy(maze, state)
+            episode.append(state_act)
+            state = state_act[0]
 
         return episode
 
@@ -28,7 +29,7 @@ class Agent:
             while rand_start in self.maze.terminate:
                 rand_start = np.random.randint(self.maze.loc.min(), self.maze.loc.max())
 
-            episode = self.create_episode(self.maze, rand_start, self.maze.terminate, policy)  # Generate episode
+            episode, ep_act = zip(*self.create_episode(self.maze, rand_start, self.maze.terminate, policy))  # Generate episode
             g = 0
 
             for i, step in reversed(list(enumerate(episode[-2::-1]))):
@@ -56,7 +57,7 @@ class Agent:
                 start_pos = np.random.randint(self.maze.loc.min(), self.maze.loc.max())
             else:
                 start_pos = self.start
-            episode = self.create_episode(self.maze, start_pos, self.maze.terminate, policy)
+            episode, ep_act = zip(*self.create_episode(self.maze, start_pos, self.maze.terminate, policy))
             for i, step in enumerate(episode[:-1:]):
                 coord = list(zip(*np.where(self.maze.loc == step)))[0]
                 next_coord = list(zip(*np.where(self.maze.loc == episode[i + 1])))[0]
@@ -77,7 +78,7 @@ class Agent:
         returns = {}
 
         for _ in range(iterations):
-            episode = self.create_episode(self.maze, self.start, self.maze.terminate, policy)
+            episode, ep_act = zip(*self.create_episode(self.maze, self.start, self.maze.terminate, policy))
             g = 0
             for i, step in reversed(list(enumerate(episode[-2::-1]))):
                 coord = list(zip(*np.where(self.maze.loc == episode[i + 1])))[0]
